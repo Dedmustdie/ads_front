@@ -1,6 +1,6 @@
 import {SORT_CODE_BY_NAME, SORT_NAME_BY_CODE} from './const/constants.js'
 import {sendRequest, getAdUrl} from './utils/net_util.js'
-import {PER_PAGE} from "./config.js";
+import {ADS_PER_PAGE} from "./config.js";
 
 let mainDiv = document.getElementById('main-div')
 let url = window.location

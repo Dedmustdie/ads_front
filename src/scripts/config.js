@@ -1,1 +1,1 @@
-export const PER_PAGE = 7
+export const ADS_PER_PAGE = 10

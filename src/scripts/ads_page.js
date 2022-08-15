@@ -1,6 +1,6 @@
 import {SORT_CODE_BY_NAME, SORT_NAME_BY_CODE} from './const/constants.js'
 import {sendRequest, getAdsUrl} from './utils/net_util.js'
-import {PER_PAGE} from "./config.js"
+import {ADS_PER_PAGE} from "./config.js"
 
 let url = window.location
 
@@ -44,7 +44,7 @@ Array.from(document.getElementsByClassName('dropdown-item')).forEach((element) =
 
 sendRequest('GET', getAdsUrl(currentPage !== "" ? currentPage : 1,
     isPriceSort,
-    isTimeSort, PER_PAGE))
+    isTimeSort, ADS_PER_PAGE))
     .then(data => {
         Array.from(data['message']).forEach(ad => {
             let adsList = document.getElementById('ads-list')
@@ -56,7 +56,7 @@ sendRequest('GET', getAdsUrl(currentPage !== "" ? currentPage : 1,
 sendRequest('GET', `http://localhost/adsapi/count`)
     .then(data => {
         let pagination = document.getElementById('pagination-bar')
-        let pagesCount = Math.ceil(data['adsCount'] / PER_PAGE)
+        let pagesCount = Math.ceil(data['adsCount'] / ADS_PER_PAGE)
         if (currentPage < 1 || currentPage > pagesCount) {
             throw '404 not found'
         }
