@@ -1,4 +1,4 @@
-import {REQUEST_URL, SORT_CODE_BY_NAME} from "../const/constants.js";
+import {REQUEST_URL} from "../const/constants.js";
 
 function sendRequest(method, url, body = null) {
     return new Promise((resolve, reject) => {
