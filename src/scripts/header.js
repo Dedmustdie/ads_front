@@ -24,3 +24,9 @@ document.write('<!doctype html>\n' +
     '        <button id="create-page-button" class="me-3 py-1 text-dark ">Создать объявление</button>\n' +
     '    </nav>\n' +
     '</div>')
+
+let createPageButton = document.getElementById('create-page-button');
+createPageButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.location.href = '/create';
+})

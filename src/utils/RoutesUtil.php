@@ -1,5 +1,4 @@
 <?php
-
 class RoutesUtil
 {
     private static array $routes = array();
@@ -19,5 +18,6 @@ class RoutesUtil
                 return $callback();
             }
         }
+        require_once  __DIR__ . '/../view/error_page.html';
     }
 }

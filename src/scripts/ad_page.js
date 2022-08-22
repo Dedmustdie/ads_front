@@ -18,6 +18,8 @@ sendRequest('GET', getAdUrl(currentId,
         adContent.innerHTML += `<a class="list-group-item">${data['title']}</a>`
         adContent.innerHTML += `<a class="list-group-item">Описание: ${data['text']}</a>`
         adContent.innerHTML += `<a class="list-group-item">Стоимость: ${data['price']}</a>`
+        adContent.innerHTML += `<img src="../view/images/0e4Fre_a1SE.jpg" alt="1" ><br />`;
+
         // Array.from(data['message']).forEach(ad => {
         //     let adsList = document.getElementById('ad')
         //     adsList.innerHTML += `<a href="/ad/${ad['id']}" class="list-group-item">${ad['title']}</a>`
