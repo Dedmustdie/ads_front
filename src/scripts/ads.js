@@ -7,7 +7,7 @@ let url = window.location
 if (url.search === '') {
     url.search = `?isPriceSort=${SORT_CODE_BY_NAME.get('Сначала новые')[0]}&isTimeSort=${SORT_CODE_BY_NAME.get('Сначала новые')[1]}`
 }
- 
+
 let currentPage = Number(url.pathname.replace("/", "") === "" ? 1 :
     window.location.pathname.replace("/", ""))
 let isPriceSort = new URLSearchParams(url.search).get('isPriceSort')
@@ -51,7 +51,7 @@ sendRequest('GET', getAdsUrl(currentPage !== "" ? currentPage : 1,
             adsList.innerHTML += `<a href="/ad/${ad['id']}" class="list-group-item">${ad['title']}</a>`
         })
     })
-    .catch(err => console.log(err))
+    .catch(err => window.location.href = '/internal')
 
 sendRequest('GET', `http://localhost/adsapi/count`)
     .then(data => {
@@ -79,7 +79,7 @@ sendRequest('GET', `http://localhost/adsapi/count`)
         }
 
     })
-    .catch(err => console.log(err))
+    .catch(err => {window.location.href = '/internal'})
 
 
 

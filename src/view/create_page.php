@@ -25,6 +25,6 @@
         </div>
     </div>
 </section>
-<script type="module" src="../scripts/create_page.js"></script>
+<script type="module" src="../scripts/create.js"></script>
 </body>
 </html>

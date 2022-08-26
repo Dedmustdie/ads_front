@@ -18,6 +18,6 @@ class RoutesUtil
                 return $callback();
             }
         }
-        require_once  __DIR__ . '/../view/error_page.html';
+        require_once __DIR__ . '/../view/not_found_page.html';
     }
 }

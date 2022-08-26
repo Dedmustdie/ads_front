@@ -17,6 +17,8 @@ sendRequest('GET', getAdUrl(currentId,
         adContent.innerHTML += `<a class="list-group-item">${data['title']}</a>`
         adContent.innerHTML += `<a class="list-group-item">Описание: ${data['text']}</a>`
         adContent.innerHTML += `<a class="list-group-item">Стоимость: ${data['price']}</a>`
-        adContent.innerHTML += `<img src="/images/${data['images_name'][0]}" alt="1" ><br />`;
+        Array.from(data['images_name']).forEach(name => {
+            adContent.innerHTML += `<img src="/images/${name}"  alt=""><br />`;
+        })
     })
-    .catch(err => console.log(err))
+    .catch(err => window.location.href = '/internal')

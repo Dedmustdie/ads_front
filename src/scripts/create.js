@@ -44,6 +44,11 @@ form.onsubmit = function (evt) {
                             Отсутствует цена!
                             </div>`
         isError = true
+    } else if (!(/^(0|[1-9]\d*)(\.[0-9]{1,2})?$/.test(price.value))) {
+        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
+                            Неверный формат цены!
+                            </div>`
+        isError = true
     }
 
     if (images.length > 3) {
@@ -56,14 +61,13 @@ form.onsubmit = function (evt) {
         evt.preventDefault();
     } else {
         sendRequest('POST', "http://localhost/adsapi/add", {
-            "title": title,
-            "text": text,
-            "price": price,
+            "title": title.value,
+            "text": text.value,
+            "price": price.value,
             "images": images
         })
-            .then(data => {
-                console.log(data);
+            .catch(err => {
+                window.location.href = '/internal'
             })
-            .catch(err => console.log(err))
     }
 }
