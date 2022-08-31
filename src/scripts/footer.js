@@ -1,0 +1,2 @@
+document.write('</body>' +
+    '</html>')

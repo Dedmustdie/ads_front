@@ -1,6 +1,7 @@
-import {sendRequest} from './utils/net_util.js'
+import {getCreateUrl, sendRequest} from './utils/net_util.js'
+import {TITLE_MAX_LENGTH, TEXT_MAX_LENGTH, PRICE_MAX_LENGTH, IMAGES_MAX_COUNT} from "./config.js"
 
-let form = document.querySelector('.form');
+let form = document.querySelector('.form')
 form.onsubmit = function (evt) {
     let errorDiv = document.getElementById('error-div')
     let title = document.getElementById('create-title')
@@ -10,64 +11,55 @@ form.onsubmit = function (evt) {
         .map(file => file.name)
     let isError = false
     errorDiv.replaceChildren()
-    if (title.value.length > 100) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Превышен максимальный размер заголовка!
-                            </div>`
+    if (title.value.length > TITLE_MAX_LENGTH) {
+        makeMistakeHtml('Превышен максимальный размер заголовка!', errorDiv)
         isError = true
     } else if (title.value.length < 1) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Отсутствует заголовок!
-                            </div>`
+        makeMistakeHtml('Отсутствует заголовок!', errorDiv)
         isError = true
     }
 
-    if (text.value.length > 1000) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Превышен максимальный размер текста!
-                            </div>`
+    if (text.value.length > TEXT_MAX_LENGTH) {
+        makeMistakeHtml('Превышен максимальный размер текста!', errorDiv)
         isError = true
     } else if (text.value.length < 1) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Отсутствует текст!
-                            </div>`
+        makeMistakeHtml('Отсутствует текст!', errorDiv)
         isError = true
     }
 
-    if (price.value.length > 20) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Превышен максимальный размер цены!
-                            </div>`
+    if (price.value.length > PRICE_MAX_LENGTH) {
+        makeMistakeHtml('Превышен максимальный размер цены!', errorDiv)
         isError = true
     } else if (price.value.length < 1) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Отсутствует цена!
-                            </div>`
+        makeMistakeHtml('Отсутствует цена!', errorDiv)
         isError = true
     } else if (!(/^(0|[1-9]\d*)(\.[0-9]{1,2})?$/.test(price.value))) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Неверный формат цены!
-                            </div>`
+        makeMistakeHtml('Неверный формат цены!', errorDiv)
         isError = true
     }
-
-    if (images.length > 3) {
-        errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">
-                            Превышено максимальное количество изображений!
-                            </div>`
+    if (images.length > IMAGES_MAX_COUNT) {
+        makeMistakeHtml('Превышено максимальное количество изображений!', errorDiv)
         isError = true
     }
     if (isError) {
-        evt.preventDefault();
+        evt.preventDefault()
     } else {
-        sendRequest('POST', "http://localhost/adsapi/add", {
+        sendRequest('POST', getCreateUrl(), false,{
             "title": title.value,
             "text": text.value,
             "price": price.value,
             "images": images
         })
             .catch(err => {
+                evt.preventDefault()
                 window.location.href = '/internal'
             })
     }
+}
+
+function makeMistakeHtml(mistakeText, errorDiv) {
+    errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">` +
+        mistakeText +
+        `</div>`
+
 }

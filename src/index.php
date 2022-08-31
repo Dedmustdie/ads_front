@@ -3,7 +3,7 @@ require __DIR__ . '/const/constants.php';
 require __DIR__ . '/utils/RoutesUtil.php';
 
 RoutesUtil::route(CREATE_PAGE_PATTERN, function () {
-    require_once 'view/create_page.php';
+    require_once 'view/create_page.html';
 });
 
 RoutesUtil::route(ADS_PAGE_PATTERN, function () {

@@ -1,14 +1,16 @@
-import {REQUEST_URL} from "../const/constants.js";
+import {REQUEST_URL} from "../const/constants.js"
 
-function sendRequest(method, url, body = null) {
+function sendRequest(method, url, isAsync = true, body = null) {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
 
-        xhr.open(method, url)
+        xhr.open(method, url, isAsync)
 
-        xhr.responseType = 'json'
+        if (isAsync) {
+            xhr.responseType = 'json'
+        }
+
         xhr.setRequestHeader('Content-Type', 'application/json')
-
         xhr.onload = () => {
             if (xhr.status >= 400) {
                 reject(xhr.response)
@@ -34,16 +36,28 @@ function getAdsUrl(currentPage, isPriceSort, isTimeSort, perPage) {
     return url
 }
 
-function getAdUrl(id, addtitionalFields) {
+function getCreateUrl() {
+    let url = new URL(REQUEST_URL)
+    url.pathname = url.pathname + '/add'
+    return url
+}
+
+function getCountUrl() {
+    let url = new URL(REQUEST_URL)
+    url.pathname = url.pathname + '/count'
+    return url
+}
+
+function getAdUrl(id, additionalFields) {
     let url = new URL(REQUEST_URL)
     url.pathname = url.pathname + `/ad/${id}`
-    if (addtitionalFields.includes('text')) {
+    if (additionalFields.includes('text')) {
         url.searchParams.append("fields[]", 'text')
     }
-    if (addtitionalFields.includes('images')) {
+    if (additionalFields.includes('images')) {
         url.searchParams.append('fields[]', 'images')
     }
     return decodeURIComponent(url)
 }
 
-export {sendRequest, getAdsUrl, getAdUrl}
+export {sendRequest, getAdsUrl, getAdUrl, getCreateUrl, getCountUrl}

@@ -25,8 +25,8 @@ document.write('<!doctype html>\n' +
     '    </nav>\n' +
     '</div>')
 
-let createPageButton = document.getElementById('create-page-button');
+let createPageButton = document.getElementById('create-page-button')
 createPageButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    window.location.href = '/create';
+    e.preventDefault()
+    window.location.href = '/create'
 })
