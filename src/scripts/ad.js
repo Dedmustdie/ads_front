@@ -3,7 +3,7 @@ import {sendRequest, getAdUrl} from './utils/net_util.js'
 let mainDiv = document.getElementById('main-div')
 let url = window.location
 
-mainDiv.innerHTML += `<div id='ad-content' class='list-group'>
+mainDiv.innerHTML += `<div id="ad-content" class="list-group">
 
 </div>`
 sendRequest('GET', getAdUrl(Number(url.pathname.replace('/ad/', '')),
@@ -14,7 +14,7 @@ sendRequest('GET', getAdUrl(Number(url.pathname.replace('/ad/', '')),
         adContent.innerHTML += `<a class="list-group-item">Описание: ${data['text']}</a>`
         adContent.innerHTML += `<a class="list-group-item">Стоимость: ${data['price']}</a>`
         Array.from(data['images_name']).forEach(name => {
-            adContent.innerHTML += `<img src='/images/${name}'  alt='><br />`
+            adContent.innerHTML += `<img src="/images/${name}"  alt=""><br />`
         })
     })
     .catch(err => window.location.href = '/internal')
