@@ -1,5 +1,5 @@
 import {getCreateUrl, sendRequest} from './utils/net_util.js'
-import {TITLE_MAX_LENGTH, TEXT_MAX_LENGTH, PRICE_MAX_LENGTH, IMAGES_MAX_COUNT} from "./config.js"
+import {TITLE_MAX_LENGTH, TEXT_MAX_LENGTH, PRICE_MAX_LENGTH, IMAGES_MAX_COUNT} from './config.js'
 
 let form = document.querySelector('.form')
 form.onsubmit = function (evt) {
@@ -45,10 +45,10 @@ form.onsubmit = function (evt) {
         evt.preventDefault()
     } else {
         sendRequest('POST', getCreateUrl(), false,{
-            "title": title.value,
-            "text": text.value,
-            "price": price.value,
-            "images": images
+            'title': title.value,
+            'text': text.value,
+            'price': price.value,
+            'images': images
         })
             .catch(err => {
                 evt.preventDefault()
@@ -61,5 +61,4 @@ function makeMistakeHtml(mistakeText, errorDiv) {
     errorDiv.innerHTML += `<div id="error-text" class="alert alert-danger" role="alert">` +
         mistakeText +
         `</div>`
-
 }

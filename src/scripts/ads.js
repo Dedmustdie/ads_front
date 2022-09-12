@@ -1,6 +1,6 @@
 import {SORT_CODE_BY_NAME, SORT_NAME_BY_CODE} from './const/constants.js'
 import {sendRequest, getAdsUrl, getCountUrl} from './utils/net_util.js'
-import {ADS_PER_PAGE} from "./config.js"
+import {ADS_PER_PAGE} from './config.js'
 
 let url = window.location
 let isPriceSort
@@ -12,8 +12,8 @@ if (url.search === '') {
     isPriceSort = new URLSearchParams(url.search).get('isPriceSort')
     isTimeSort = new URLSearchParams(url.search).get('isTimeSort')
 }
-let currentPage = Number(url.pathname.replace("/", "") === "" ? 1 :
-    window.location.pathname.replace("/", ""))
+let currentPage = Number(url.pathname.replace('/', '') === '' ? 1 :
+    window.location.pathname.replace('/', ''))
 
 let mainDiv = document.getElementById('main-div')
 mainDiv.innerHTML += `<div class="dropdown">
@@ -44,7 +44,7 @@ Array.from(document.getElementsByClassName('dropdown-item')).forEach((element) =
     })
 })
 
-sendRequest('GET', getAdsUrl(currentPage !== "" ? currentPage : 1,
+sendRequest('GET', getAdsUrl(currentPage !== '' ? currentPage : 1,
     isPriceSort, isTimeSort, ADS_PER_PAGE))
     .then(data => {
         Array.from(data['message']).forEach(ad => {
